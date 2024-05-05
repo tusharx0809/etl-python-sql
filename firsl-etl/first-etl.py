@@ -4,7 +4,7 @@
 import pyodbc
 import pandas as pd
 
-file = 'D:\\Python\\etl-python-sql\\sample.csv'
+file = 'D:\\Python\\etl-python-sql\\firsl-etl\\sample.csv'
 columns = ['column' + str(i) if i != 0 else '' for i in range(1, 11)]
 df = pd.read_csv(file, encoding='latin1', names=columns)
 
