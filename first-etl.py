@@ -1,5 +1,5 @@
 """This is a small ETL project which extracts data from csv and loads into the MSSQL server"""
-#The csv contains random data with 5000 rows, out of which we are going to extract only top 100 rows with valiues Name, Province and Profession. Then we will load these values in our MS-SQL server in testing database and Analysis table which is initially empty
+#The csv contains random data with 5000 rows, out of which we are going to extract only top 100 rows with valiues Name, Province and Profession. Then we will load these values in our MS-SQL server in testing database and Analysis table which is initially empty.
 
 import pyodbc
 import pandas as pd
@@ -38,5 +38,5 @@ values(?,?,?)
 """
 
 for values in to_sql:
-    cursor.execute(insert_query, values)
+    cursor.execute(insert_query, values) # usign execute function we run insert query for each value in to_sql array
 connection.commit()
