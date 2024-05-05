@@ -1,7 +1,7 @@
 """This is a small ETL project which extracts data from csv and loads into the MSSQL server"""
-#The csv contains random data with 5000 rows, out of which we are going to extract only top 100 rows with valiues Name, Province and Profession. Then we will load these values in our MS-SQL server
+#The csv contains random data with 5000 rows, out of which we are going to extract only top 100 rows with valiues Name, Province and Profession. Then we will load these values in our MS-SQL server in testing database and Analysis table which is initially empty
 
-
+import pyodbc
 import pandas as pd
 
 file = 'D:\\Python\\etl-python-sql\\sample.csv'
@@ -20,6 +20,23 @@ for idx,row in df.iterrows():
     i += 1
     if i == 100:
         break
-print(len(to_sql))   
+# create a connection string to connect to database using pyodbc
+connection_string = f"""
+    Driver=ODBC Driver 17 for SQL Server;
+    Server=localhost\SQLEXPRESS;
+    Database=testing;
+    Trusted_Connection=yes;
+"""
 
-    
+connection = pyodbc.connect(connection_string)
+
+cursor = connection.cursor()
+
+insert_query = """
+insert into Analysis(name,province,profession)
+values(?,?,?)
+"""
+
+for values in to_sql:
+    cursor.execute(insert_query, values)
+connection.commit()
