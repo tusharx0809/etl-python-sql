@@ -1,0 +1,1 @@
+"""This is a small ETL project which extracts data from csv and loads into the MSSQL server"""
