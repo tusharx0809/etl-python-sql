@@ -3,16 +3,19 @@ import random
 import pandas as pd
 from extract import *
 
-#customer_df dataframe generated in extract file
-#columns in customer_df are [Id,FirstName,LastName,City,Country,Phone]
-customers_data = []
-for index,row in customer_df.iterrows():
-    temp = []
-    temp.append(row['Id'])
-    temp.append(row['FirstName'])
-    temp.append(row['LastName'])
-    temp.append(row['City'])
-    temp.append(row['Country'])
-    temp.append(row['Phone'])
-    customers_data.append(temp)
-print(customers_data)
+#we have already created dataframes for all the tables, now we are going to convert the data into python lists so that we can manipulate and push our findings and clena data into target system
+def get_data(dataframe):
+    data = []
+    columns = list(dataframe.columns)
+    for idx,row in dataframe.iterrows():
+        temp = []
+        for i in columns:
+            temp.append(row[i])
+        data.append(temp)
+    return data
+
+customer_data = get_data(customer_df)
+order_data = get_data(order_df)
+orderitem_data = get_data(orderitem_df)
+product_data = get_data(product_df)
+supplier_data = get_data(supplier_df)
