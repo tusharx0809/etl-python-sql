@@ -25,7 +25,7 @@ Create table customer_orders(
   id int,
   full_name varchar(255),
   contact_number varchar(255),
-  location varchar(244),
+  location varchar(255),
   total_orders int,
   total_amount decimal(10,2)
 )"""
