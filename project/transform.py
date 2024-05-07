@@ -21,3 +21,4 @@ orderitem_data = get_data(orderitem_df)
 product_data = get_data(product_df)
 supplier_data = get_data(supplier_df)
 
+print(supplier_data)
