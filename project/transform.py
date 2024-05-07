@@ -105,12 +105,13 @@ for row in range(len(product_data)):
             for digit in supplier_data[i][6]:
                 if digit.isdigit():
                     contact_num += digit
+            row_info.append(contact_num)
             if supplier_data[i][7] is None:
                 row_info.append('Missing Info!')
             else:
                 row_info.append(supplier_data[i][7])
-            row_info.append(contact_num)
     products_data.append(row_info)
-print(products_data)
+for i in products_data:
+    print(i)
 
 
