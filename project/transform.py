@@ -32,7 +32,7 @@ supplier_data = get_data(supplier_df)
 #To acces the values, we just use python functionality of lists and indexes, for example customer_data[0][1] will be Maria which is the FirsName for first row in our table
 #This will be same for each of the other datasets
 
-#we are going to create a target table with customer information with below columns when we load the data
+#we are going to create a target table with customer_orders information with below columns when we load the data
 # id int
 # full_name varchar(255)
 # location varchar(255) like Berlin, Italy
@@ -41,17 +41,17 @@ supplier_data = get_data(supplier_df)
 # total_amount decimal(10,2)
 
 customer_orders_data = [] #this list will contain the transformed data which will then be pushed to target database
-for i in range(len(customer_data)):
-    ids = customer_data[i][0]
+for row in range(len(customer_data)):
+    ids = customer_data[row][0]
     row_info = []
-    row_info.append(customer_data[i][0])
-    row_info.append(customer_data[i][1] + ' ' + customer_data[i][2])
+    row_info.append(customer_data[row][0])
+    row_info.append(customer_data[row][1] + ' ' + customer_data[row][2])
     contact_num = ''
-    for digit in customer_data[i][5]:
+    for digit in customer_data[row][5]:
         if digit.isdigit():
             contact_num += digit
     row_info.append(contact_num)
-    row_info.append(customer_data[i][3] + ', ' + customer_data[i][4])
+    row_info.append(customer_data[row][3] + ', ' + customer_data[row][4])
     count = 0
     total_amount = 0
     for j in range(len(order_data)):
@@ -63,3 +63,54 @@ for i in range(len(customer_data)):
     customer_orders_data.append(row_info)
 
 #we have extracted the data into table1_data, so we can push it into MS-SQL database
+
+
+#                    product_data[list][0] is id 
+#                    product_data[list][0] is ProductName
+#                    product_data[list][2] is SupplierId
+#                    product_data[list][3] is UnitPrice
+#                    product_data[list][4] is Package
+#                    product_data[list][5] is isDicontinued
+
+#we are going to create a target table with product information with below columns and we will only add products which are not discontinued
+#product_data = for each list in product_data
+# id int,
+# product_name varchar(255)
+# product_price deciman(10,2)
+# supplier_company_name varchar(255)
+# supplier_name
+# contact_title varchar(255)
+# location varchar(255)
+# phone varchar(255)
+# fax_info varchar(255)
+
+products_data = []
+
+for row in range(len(product_data)):
+    row_info = []
+    row_info.append(product_data[row][0])
+    row_info.append(product_data[row][1])
+    row_info.append(float(product_data[row][3]))
+
+    for i in range(len(supplier_data)):
+        if supplier_data[i][0] == product_data[row][2]:
+            row_info.append(supplier_data[i][1])
+            row_info.append(supplier_data[i][2])
+            if supplier_data[i][3] is None:
+                row_info.append('Missing Info!')
+            else:
+                row_info.append(supplier_data[i][3])
+            row_info.append(supplier_data[i][4] + ', ' +supplier_data[i][5])
+            contact_num = ''
+            for digit in supplier_data[i][6]:
+                if digit.isdigit():
+                    contact_num += digit
+            if supplier_data[i][7] is None:
+                row_info.append('Missing Info!')
+            else:
+                row_info.append(supplier_data[i][7])
+            row_info.append(contact_num)
+    products_data.append(row_info)
+print(products_data)
+
+
