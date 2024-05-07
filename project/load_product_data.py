@@ -22,11 +22,23 @@ create_query = """
 create table product_info(
   id int,
   product_name varchar(255),
-  product_price deciman(10,2)
-  supplier_company_name varchar(255)
-  supplier_name
-  contact_title varchar(255)
-  location varchar(255)
-  phone varchar(255)
+  product_price decimal(10,2),
+  supplier_company_name varchar(255),
+  supplier_name varchar(255),
+  contact_title varchar(255),
+  location varchar(255),
+  phone varchar(255),
   fax_info varchar(255)
 )"""
+create_cursor.execute(create_query)
+connection.commit()
+
+insert_cursor = connection.cursor()
+
+insert_query = """
+insert into product_info(id,product_name,product_price,supplier_company_name,supplier_name,contact_title,location,phone,fax_info)
+values(?,?,?,?,?,?,?,?,?)"""
+
+for value in products_data:
+    insert_cursor.execute(insert_query, value)
+connection.commit()

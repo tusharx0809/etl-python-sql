@@ -78,7 +78,7 @@ for row in range(len(customer_data)):
 # product_name varchar(255)
 # product_price deciman(10,2)
 # supplier_company_name varchar(255)
-# supplier_name
+# supplier_name varchar(255)
 # contact_title varchar(255)
 # location varchar(255)
 # phone varchar(255)
