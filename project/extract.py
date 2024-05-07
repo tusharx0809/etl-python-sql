@@ -2,14 +2,15 @@ import random
 import pyodbc
 import pandas as pd
 
-# database downloaded from "https://www.dofactory.com/sql/sample-database"
-
+#create the connection string with MS-SQL server information, Here are we are going to extract data from testing database
 connection_string_source = f"""
     Driver=ODBC Driver 17 for SQL Server;
     Server=localhost\SQLEXPRESS;
     Database=testing;
     Trusted_Connection=yes;
 """
+
+#create the connection
 connection = pyodbc.connect(connection_string_source)
 
 #Function to fetch data from all tables
