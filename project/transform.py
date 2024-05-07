@@ -32,29 +32,36 @@ supplier_data = get_data(supplier_df)
 #To acces the values, we just use python functionality of lists and indexes, for example customer_data[0][1] will be Maria which is the FirsName for first row in our table
 #This will be same for each of the other datasets
 
-transformed_data = [] #this list will contain the transformed data which will then be pushed to target database
+table1_data = [] #this list will contain the transformed data which will then be pushed to target database
 
-#we are going to create a target table with below columns when we load the data
+#we are going to create a target table with customer information with below columns when we load the data
+# id int
 # full_name varchar(255)
 # location varchar(255) like Berlin, Italy
-# customer_contact in the form 555419123
+# customer_contact varchar(255) in the form 555419123
 # total_orders int
 # total_amount decimal(10,2)
-# 
-temp = []
+
+table1_data = [] #this list will contain the transformed data which will then be pushed to target database
 for i in range(len(customer_data)):
     ids = customer_data[i][0]
-    temp2 = []
-    temp2.append(customer_data[i][1] + ' ' + customer_data[i][2])
+    row_info = []
+    row_info.append(customer_data[i][0])
+    row_info.append(customer_data[i][1] + ' ' + customer_data[i][2])
+    contact_num = ''
+    for digit in customer_data[i][5]:
+        if digit.isdigit():
+            contact_num += digit
+    row_info.append(contact_num)
+    row_info.append(customer_data[i][3] + ', ' + customer_data[i][4])
     count = 0
     total_amount = 0
     for j in range(len(order_data)):
         if ids == order_data[j][3]:
             count += 1
             total_amount += order_data[j][4]
-    temp2.append(count)
-    temp2.append(float(total_amount))
-    temp.append(temp2)
-print(temp)
+    row_info.append(count)
+    row_info.append(float(total_amount))
+    table1_data.append(row_info)
 
-print(type(temp[0][2]))
+#we have extracted the data into table1_data, so we can push it into MS-SQL database
