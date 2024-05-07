@@ -40,7 +40,7 @@ supplier_data = get_data(supplier_df)
 # total_orders int
 # total_amount decimal(10,2)
 
-table1_data = [] #this list will contain the transformed data which will then be pushed to target database
+customer_orders_data = [] #this list will contain the transformed data which will then be pushed to target database
 for i in range(len(customer_data)):
     ids = customer_data[i][0]
     row_info = []
@@ -60,6 +60,6 @@ for i in range(len(customer_data)):
             total_amount += order_data[j][4]
     row_info.append(count)
     row_info.append(float(total_amount))
-    table1_data.append(row_info)
+    customer_orders_data.append(row_info)
 
 #we have extracted the data into table1_data, so we can push it into MS-SQL database

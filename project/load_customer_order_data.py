@@ -17,7 +17,7 @@ connection = pyodbc.connect(connection_string_source)
 create_cursor = connection.cursor()
 
 #table1_data extracted in extraction file, now we will load it
-table1_data = table1_data
+customer_orders_data = customer_orders_data
 
 create_cursor = connection.cursor()
 create_query = """
@@ -37,6 +37,6 @@ insert into customer_orders(id,full_name,contact_number,location,total_orders,to
 values(?,?,?,?,?,?)"""
 
 insert_cursor = connection.cursor()
-for value in table1_data:
+for value in customer_orders_data:
     insert_cursor.execute(insert_query, value)
 connection.commit()
