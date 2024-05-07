@@ -7,4 +7,7 @@
 
 # Below is the first customer_orders table loaded in the testing2 database
 # this table has merged first and last name, city and country to location and has retrieved total number of orders and total amount
-![alt text](first_table.png)
+![alt text](customer_order.png)
+
+# Below product_info table created in testing2 database
+![alt text](product_info.png)
