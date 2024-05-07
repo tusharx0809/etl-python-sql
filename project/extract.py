@@ -27,5 +27,3 @@ order_df = get_table(connection_string_source, 'select * from [order]')
 orderitem_df = get_table(connection_string_source,'select * from orderitem')
 product_df = get_table(connection_string_source,'select * from product')
 supplier_df = get_table(connection_string_source,'select * from supplier')
-
-print(order_df)
