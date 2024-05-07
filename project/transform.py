@@ -53,7 +53,8 @@ for i in range(len(customer_data)):
             count += 1
             total_amount += order_data[j][4]
     temp2.append(count)
-    temp2.append(total_amount)
+    temp2.append(float(total_amount))
     temp.append(temp2)
 print(temp)
 
+print(type(temp[0][2]))
