@@ -32,8 +32,6 @@ supplier_data = get_data(supplier_df)
 #To acces the values, we just use python functionality of lists and indexes, for example customer_data[0][1] will be Maria which is the FirsName for first row in our table
 #This will be same for each of the other datasets
 
-table1_data = [] #this list will contain the transformed data which will then be pushed to target database
-
 #we are going to create a target table with customer information with below columns when we load the data
 # id int
 # full_name varchar(255)
