@@ -13,13 +13,5 @@ connection_string_source = f"""
 
 #create the connection
 connection = pyodbc.connect(connection_string_source)
-
 cursor = connection.cursor()
 
-create_query ="""
-create table target_table(
-customer_id int,
-full_name varchar(255)
-)"""
-cursor.execute(create_query)
-connection.commit()
