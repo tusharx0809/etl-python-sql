@@ -1,4 +1,4 @@
-# This repository contains my own ETL and data analysis project project
+# This repository contains my own ETL and data analysis project 
 # Queries to create database downloaded from "https://www.dofactory.com/sql/sample-database"
 # Belows is the Schema of the testing database
 ![alt text](schema.png)
