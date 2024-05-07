@@ -21,6 +21,7 @@ def get_table(connection_string, sql_query):
     df = pd.DataFrame.from_records(rows, columns = columns)
     return df
 
+#creating data frames for each table for us to work on
 customer_df = get_table(connection_string_source,'select * from customer')
 order_df = get_table(connection_string_source, 'select * from [order]')
 orderitem_df = get_table(connection_string_source,'select * from orderitem')
