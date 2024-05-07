@@ -1,6 +1,5 @@
 import random
 import pyodbc
-import requests
 import pandas as pd
 
 # database downloaded from "https://www.dofactory.com/sql/sample-database"
@@ -11,14 +10,21 @@ connection_string_source = f"""
     Database=testing;
     Trusted_Connection=yes;
 """
-
 connection = pyodbc.connect(connection_string_source)
 
-#Fetching data from customers table
-customer_cursor = connection.cursor()
-customer_query = 'select * from customer'
-customer_cursor.execute(customer_query)
-customer_rows = customer_cursor.fetchall()
-customer_columns = [column[0] for column in customer_cursor.description]
-customer_df = pd.DataFrame.from_records(customer_rows, columns = customer_columns)
-print(customer_df)
+#Function to fetch data from all tables
+def get_table(connection_string, sql_query):
+    cursor = connection.cursor()
+    cursor.execute(sql_query)
+    rows = cursor.fetchall()
+    columns = [column[0] for column in cursor.description]
+    df = pd.DataFrame.from_records(rows, columns = columns)
+    return df
+
+customer_df = get_table(connection_string_source,'select * from customer')
+order_df = get_table(connection_string_source, 'select * from [order]')
+orderitem_df = get_table(connection_string_source,'select * from orderitem')
+product_df = get_table(connection_string_source,'select * from product')
+supplier_df = get_table(connection_string_source,'select * from supplier')
+
+print(order_df)
