@@ -16,7 +16,7 @@ connection_string_source = f"""
 connection = pyodbc.connect(connection_string_source)
 create_cursor = connection.cursor()
 
-#table1_data extracted in extraction file, now we will load it
+#customer_orders_data extracted in transform file, now we will load it
 customer_orders_data = customer_orders_data
 
 create_cursor = connection.cursor()
